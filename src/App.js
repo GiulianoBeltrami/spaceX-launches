@@ -1,6 +1,5 @@
 import React from 'react'
 import { Routes ,Route ,Link } from 'react-router-dom';
-import './App.css';
 import {NavigationBar ,Homepage,Launches,LaunchDetails,Landpads,News,Payloads,Rockets, Footer} from './components';
  
 const App = () => {
