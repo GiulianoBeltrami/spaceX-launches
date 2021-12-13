@@ -1,0 +1,17 @@
+#navbar-elements a{
+    padding-right:2.5rem;
+}
+
+#navbar-elements {
+    margin-right: 2rem;
+}
+
+.nav-link{
+    color: rgb(255,255,255,0.90) !important;
+}
+
+.footer-text{
+    color: rgb(255,255,255,0.90) !important;
+    font-size: 0.8rem;
+}
+
