@@ -12,12 +12,33 @@ import Loader from './Loader';
 const { Link } = Nav;
 
 const Homepage = () => {
-    const {data,isFetching} = useGetSpacexInfosQuery();
-    
-    if(isFetching) {
+    const { data, isFetching } = useGetSpacexInfosQuery();
+
+    if (isFetching) {
         return <Loader />
     }
-    console.log(data);
+
+    const renderParagraphWithWikipediaAnchorTo = (elementName) => {
+        return (
+            <p className="lead d-inline">
+                <a target="_blank" className="text-dark" href={`https://pt.wikipedia.org/wiki/${elementName}`}>
+                    {elementName}
+                </a>
+            </p>
+        )
+    }
+
+    const renderTitle = (titleName) => {
+        return (
+            <h5 className="text-capitalize d-inline">{titleName}: </h5>
+        );
+    }
+
+    const renderParagraph = (paragraphContent) => {
+        return (
+            <p className="lead d-inline">{paragraphContent}</p>
+        );
+    }
 
     return (
         <Container fluid>
@@ -35,15 +56,41 @@ const Homepage = () => {
             </Row>
 
             <Row className="align-middle ">
-                <Col>
-                    <h2 className="d-inline">Company informations</h2>
-                    <RocketLaunchIcon className="home-icons-size pb-1" />
-                </Col>
-                <div class="w-100"></div>
-                <Col>
-                    <h5 className="text-capitalize d-inline">Name: </h5>
-                    <p className="lead d-inline">{data?.name}</p>
-                </Col>
+                <Row>
+                    <Col>
+                        <h2 className="d-inline">Company informations</h2>
+                        <RocketLaunchIcon className="home-icons-size pb-1" />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        {renderTitle('Name')}
+                        {renderParagraph(data?.name)}
+                        <br />
+                        {renderTitle('Founder')}
+                        {renderParagraphWithWikipediaAnchorTo(data?.founder)}
+                        <br />
+                        <h5 className="text-capitalize d-inline">Founded: </h5>
+                        <p className="lead d-inline">{data?.founded}</p>
+                        <br />
+                        <h5 className="text-capitalize d-inline">CEO: </h5>
+                        {renderParagraphWithWikipediaAnchorTo(data?.ceo)}
+                    </Col>
+                    <Col>
+                        <h5 className="text-capitalize d-inline">CTO: </h5>
+                        {renderParagraphWithWikipediaAnchorTo(data?.cto)}
+                        <br />
+                        <h5 className="text-capitalize d-inline">COO: </h5>
+                        {renderParagraphWithWikipediaAnchorTo(data?.coo)}
+                        <br />
+                        <h5 className="text-capitalize d-inline">Employees: </h5>
+                        <p className="lead d-inline">{millify(data?.employees)}</p>
+                        <br />
+                        <h5 className="text-capitalize d-inline">Valuation: </h5>
+                        <p className="lead d-inline">{millify(data?.valuation)}</p>
+                    </Col>
+                </Row>
+
             </Row>
 
             <Row className="align-middle">
