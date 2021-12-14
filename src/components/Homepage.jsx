@@ -1,15 +1,17 @@
-import React from 'react';
-import { Container, Row, Col, Nav } from 'react-bootstrap';
-import millify from 'millify';
-import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
-import LocationOnIcon from '@mui/icons-material/LocationOn';
-import NoteIcon from '@mui/icons-material/Note';
 import LinkIcon from '@mui/icons-material/Link';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
+import NoteIcon from '@mui/icons-material/Note';
+import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import millify from 'millify';
+import React from 'react';
+import { Col, Row } from 'react-bootstrap';
+import helper from '../helpers/HomepageHelper';
 import { useGetSpacexInfosQuery } from '../services/spacexAPI';
 import Loader from './Loader';
+import { Maps } from '../components'
 
-const { Link } = Nav;
+const { Title, Paragraph } = helper;
 
 const Homepage = () => {
     const { data, isFetching } = useGetSpacexInfosQuery();
@@ -17,34 +19,11 @@ const Homepage = () => {
     if (isFetching) {
         return <Loader />
     }
-
-    const renderParagraphWithWikipediaAnchorTo = (elementName) => {
-        return (
-            <p className="lead d-inline">
-                <a target="_blank" className="text-dark" href={`https://pt.wikipedia.org/wiki/${elementName}`}>
-                    {elementName}
-                </a>
-            </p>
-        )
-    }
-
-    const renderTitle = (titleName) => {
-        return (
-            <h5 className="text-capitalize d-inline">{titleName}: </h5>
-        );
-    }
-
-    const renderParagraph = (paragraphContent) => {
-        return (
-            <p className="lead d-inline">{paragraphContent}</p>
-        );
-    }
-
     return (
-        <Container fluid>
-            <Row className="pt-3">
+        <>
+            <Row className="pt-3 px-5 mx-5">
                 <Col>
-                    <h2>SpaceX project</h2>
+                    <h3>SpaceX project</h3>
                     <p className="lead">
                         This is an unofficial project, designed to show lauches from spaceX company along with some other company informations and news.
                         All the informations come from a public api.
@@ -55,73 +34,90 @@ const Homepage = () => {
                 </Col>
             </Row>
 
-            <Row className="align-middle ">
+            <Row className="align-middle pt-3 px-5 mx-5">
                 <Row>
                     <Col>
-                        <h2 className="d-inline">Company informations</h2>
+                        <h3 className="d-inline">Company informations</h3>
                         <RocketLaunchIcon className="home-icons-size pb-1" />
                     </Col>
                 </Row>
                 <Row>
+                    {renderCompanyInformations(data)}
+                </Row>
+            </Row>
+
+            <Row className="align-middle pt-3 px-5 mx-5">
+                <Row>
                     <Col>
-                        {renderTitle('Name')}
-                        {renderParagraph(data?.name)}
-                        <br />
-                        {renderTitle('Founder')}
-                        {renderParagraphWithWikipediaAnchorTo(data?.founder)}
-                        <br />
-                        <h5 className="text-capitalize d-inline">Founded: </h5>
-                        <p className="lead d-inline">{data?.founded}</p>
-                        <br />
-                        <h5 className="text-capitalize d-inline">CEO: </h5>
-                        {renderParagraphWithWikipediaAnchorTo(data?.ceo)}
-                    </Col>
-                    <Col>
-                        <h5 className="text-capitalize d-inline">CTO: </h5>
-                        {renderParagraphWithWikipediaAnchorTo(data?.cto)}
-                        <br />
-                        <h5 className="text-capitalize d-inline">COO: </h5>
-                        {renderParagraphWithWikipediaAnchorTo(data?.coo)}
-                        <br />
-                        <h5 className="text-capitalize d-inline">Employees: </h5>
-                        <p className="lead d-inline">{millify(data?.employees)}</p>
-                        <br />
-                        <h5 className="text-capitalize d-inline">Valuation: </h5>
-                        <p className="lead d-inline">{millify(data?.valuation)}</p>
+                        <h3 className="d-inline">Location</h3>
+                        <LocationOnIcon className="home-icons-size pb-1" />
                     </Col>
                 </Row>
+                <Row className="text-center">
+                    <Col>
+                        {Paragraph().render(data?.headquarters?.address + ',' + data?.headquarters?.city + ',' + data?.headquarters?.state)}
+                    </Col>
+                </Row>
+                <Row>
 
+                </Row>
             </Row>
 
-            <Row className="align-middle">
+            <Row className="align-middle pt-3 px-5 mx-5">
                 <Col>
-                    <h2 className="d-inline">Location</h2>
-                    <LocationOnIcon className="home-icons-size pb-1" />
-                </Col>
-            </Row>
-
-            <Row className="align-middle">
-                <Col>
-                    <h2 className="d-inline">Summary</h2>
+                    <h3 className="d-inline">Summary</h3>
                     <NoteIcon className="home-icons-size pb-1" />
                 </Col>
             </Row>
 
-            <Row className="align-middle">
+            <Row className="align-middle pt-3 px-5 mx-5">
                 <Col>
-                    <h2 className="d-inline">Links</h2>
+                    <h3 className="d-inline">Links</h3>
                     <LinkIcon className="home-icons-size pb-1" />
                 </Col>
             </Row>
 
-            <Row className="align-middle">
+            <Row className="align-middle pt-3 px-5 mx-5">
                 <Col>
-                    <h2 className="d-inline">News</h2>
+                    <h3 className="d-inline">News</h3>
                     <NewspaperIcon className="home-icons-size pb-1" />
                 </Col>
             </Row>
-        </Container>
+        </>
     )
 }
 
-export default Homepage
+const renderCompanyInformations = (companyInfos) => {
+    return (
+        <>
+            <Col className="col-4">
+                {Title().render("Name")}
+                {Paragraph().render(companyInfos?.name)}
+                <br />
+                {Title().render("Founder")}
+                {Paragraph().renderhWithAnchorToWikipedia(companyInfos?.founder)}
+                <br />
+                {Title().render("Founded")}
+                {Paragraph().render(companyInfos?.founded)}
+                <br />
+                {Title().render("CEO")}
+                {Paragraph().renderhWithAnchorToWikipedia(companyInfos?.ceo)}
+            </Col>
+            <Col className="col-4">
+                {Title().render("CTO")}
+                {Paragraph().renderhWithAnchorToWikipedia(companyInfos?.cto)}
+                <br />
+                {Title().render("COO")}
+                {Paragraph().renderhWithAnchorToWikipedia(companyInfos?.coo)}
+                <br />
+                {Title().render("Employees")}
+                {Paragraph().render(millify(companyInfos?.employees))}
+                <br />
+                {Title().render("Valuation")}
+                {Paragraph().render(millify(companyInfos?.valuation))}
+            </Col>
+        </>
+    );
+}
+
+export default Homepage;

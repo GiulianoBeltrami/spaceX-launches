@@ -33,16 +33,4 @@ const Footer = () => {
     )
 }
 
-export default Footer
-
-{/* <Nav id="footer-elements"  >
-<Item>
-    <Link href="/">Home</Link>
-</Item>
-<Item>
-    <Link href="/launches">Launches</Link>
-</Item>
-<Item>
-    <Link href="/news">News</Link>
-</Item>
-</Nav> */}
+export default Footer;
