@@ -20,7 +20,8 @@ const Homepage = () => {
     }
     return (
         <>
-            <Row className="pt-3 ">
+            {/* col-xs-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3*/}
+            <Row className={renderRowClass()}>
                 <Col>
                     <h3>SpaceX project</h3>
                     <p className="lead">
@@ -33,7 +34,7 @@ const Homepage = () => {
                 </Col>
             </Row>
 
-            <Row className="align-middle pt-3 ">
+            <Row className={renderRowClass()}>
                 <Row>
                     <Col>
                         <h3 className="d-inline">Company informations</h3>
@@ -45,40 +46,44 @@ const Homepage = () => {
                 </Row>
             </Row>
 
-            <Row className="align-middle pt-3">
+            <Row className={renderRowClass()}>
                 <Row>
                     <Col>
                         <h3 className="d-inline">Location</h3>
                         <LocationOnIcon className="home-icons-size pb-1" />
                     </Col>
                 </Row>
+
                 <Row className="text-center">
                     <Col>
                         {Paragraph().render(data?.headquarters?.address + ',' + data?.headquarters?.city + ',' + data?.headquarters?.state)}
                     </Col>
                 </Row>
-                <Row>
-                    <Col className="text-center">
-                        <iframe src="https://maps.google.com/maps?q=33.920996821351046,%20-118.3279143676075&t=&z=13&ie=UTF8&iwloc=&output=embed" width="550" height="250" frameborder="0" style={{ border: 0 }} allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+
+                <Row className="justify-content-center">
+                    <Col className="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8"> 
+                        <div className="ratio ratio-16x9">
+                            <iframe src="https://maps.google.com/maps?q=33.920996821351046,%20-118.3279143676075&t=&z=13&ie=UTF8&iwloc=&output=embed" ></iframe>
+                        </div>
                     </Col>
                 </Row>
             </Row>
 
-            <Row className="align-middle pt-3 ">
+            <Row className={renderRowClass()}>
                 <Col>
                     <h3 className="d-inline">Summary</h3>
                     <NoteIcon className="home-icons-size pb-1" />
                 </Col>
             </Row>
 
-            <Row className="align-middle pt-3 ">
+            <Row className={renderRowClass()}>
                 <Col>
                     <h3 className="d-inline">Links</h3>
                     <LinkIcon className="home-icons-size pb-1" />
                 </Col>
             </Row>
 
-            <Row className="align-middle pt-3 ">
+            <Row className={renderRowClass()}>
                 <Col>
                     <h3 className="d-inline">News</h3>
                     <NewspaperIcon className="home-icons-size pb-1" />
@@ -88,10 +93,17 @@ const Homepage = () => {
     )
 }
 
+const renderRowClass = () => {
+    return "align-middle pt-3 px-sm-5 mx-sm-5 px-md-5 mx-md-5 px-lg-6 mx-lg-6";
+}
+
 const renderCompanyInformations = (companyInfos) => {
+    const renderColClass = () => "col-xs-6 col-sm-3 col-md-6 col-lg-4 col-xl-2";
+
     return (
         <>
-            <Col className="col-4">
+            {/* col-xs-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3*/}
+            <Col className={renderColClass()}>
                 {Title().render("Name")}
                 {Paragraph().render(companyInfos?.name)}
                 <br />
@@ -104,7 +116,7 @@ const renderCompanyInformations = (companyInfos) => {
                 {Title().render("CEO")}
                 {Paragraph().renderhWithAnchorToWikipedia(companyInfos?.ceo)}
             </Col>
-            <Col className="col-4">
+            <Col className={renderColClass()}>
                 {Title().render("CTO")}
                 {Paragraph().renderhWithAnchorToWikipedia(companyInfos?.cto)}
                 <br />

@@ -25,7 +25,7 @@ const Paragraph = {
 const Anchor = {
     renderToWikipedia : (anchor) => {
         return (
-            <a target="_blank" className="text-dark" href={`https://pt.wikipedia.org/wiki/${anchor}`}>
+            <a target="_blank" className="text-dark" rel="noreferrer" href={`https://pt.wikipedia.org/wiki/${anchor}`}>
                 {anchor}
             </a>
         )
