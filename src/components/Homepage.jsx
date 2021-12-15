@@ -10,7 +10,7 @@ import helper from '../helpers/HomepageHelper';
 import { useGetSpacexInfosQuery } from '../services/spacexAPI';
 import Loader from './Loader';
 
-const { Title, Paragraph } = helper;
+const { Title, Paragraph, Anchor } = helper;
 
 const Homepage = () => {
     const { data, isFetching } = useGetSpacexInfosQuery();
@@ -23,7 +23,7 @@ const Homepage = () => {
             {/* col-xs-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3*/}
             <Row className={renderRowClass()}>
                 <Col>
-                    <h3>SpaceX project</h3>
+                    {Title().renderH3("SpaceX project")}
                     <p className="lead">
                         This is an unofficial project, designed to show lauches from spaceX company along with some other company informations and news.
                         All the informations come from a public api.
@@ -37,8 +37,8 @@ const Homepage = () => {
             <Row className={renderRowClass()}>
                 <Row>
                     <Col>
-                        <h3 className="d-inline">Company informations</h3>
-                        <RocketLaunchIcon className="home-icons-size pb-1" />
+                        {Title().renderH3("Company informations")}
+                        <RocketLaunchIcon color={iconColor()}  className="home-icons-size pb-1" />
                     </Col>
                 </Row>
                 <Row>
@@ -49,8 +49,8 @@ const Homepage = () => {
             <Row className={renderRowClass()}>
                 <Row>
                     <Col>
-                        <h3 className="d-inline">Location</h3>
-                        <LocationOnIcon className="home-icons-size pb-1" />
+                        {Title().renderH3("Location")}
+                        <LocationOnIcon color={iconColor()} className="home-icons-size pb-1" />
                     </Col>
                 </Row>
 
@@ -61,7 +61,7 @@ const Homepage = () => {
                 </Row>
 
                 <Row className="justify-content-center">
-                    <Col className="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8"> 
+                    <Col className="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
                         <div className="ratio ratio-16x9">
                             <iframe src="https://maps.google.com/maps?q=33.920996821351046,%20-118.3279143676075&t=&z=13&ie=UTF8&iwloc=&output=embed" ></iframe>
                         </div>
@@ -70,23 +70,44 @@ const Homepage = () => {
             </Row>
 
             <Row className={renderRowClass()}>
-                <Col>
-                    <h3 className="d-inline">Summary</h3>
-                    <NoteIcon className="home-icons-size pb-1" />
-                </Col>
+                <Row>
+                    <Col>
+                        {Title().renderH3("Summary")}
+                        <NoteIcon color={iconColor()} className="home-icons-size pb-1" />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        {Paragraph().render(data?.summary)}
+                    </Col>
+                </Row>
+            </Row>
+
+            <Row className={renderRowClass()}>
+                <Row>
+                    <Col>
+                        {Title().renderH3("Links")}
+                        <LinkIcon color={iconColor()} className="home-icons-size pb-1" />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col>
+                        {Title().renderH6('SpaceX website: ')} {Anchor().renderToCustomAnchor(data?.links?.website, data?.links?.website)}
+                        <br />
+                        {Title().renderH6('Flickr: ')} {Anchor().renderToCustomAnchor(data?.links?.flickr, data?.links?.flickr)}
+                        <br />
+                        {Title().renderH6('Twitter: ')} {Anchor().renderToCustomAnchor(data?.links?.twitter, data?.links?.twitter)}
+                        <br />
+                        {Title().renderH6('Elon twitter: ')} {Anchor().renderToCustomAnchor(data?.links?.elon_twitter, data?.links?.elon_twitter)}
+                        <br />
+                    </Col>
+                </Row>
             </Row>
 
             <Row className={renderRowClass()}>
                 <Col>
-                    <h3 className="d-inline">Links</h3>
-                    <LinkIcon className="home-icons-size pb-1" />
-                </Col>
-            </Row>
-
-            <Row className={renderRowClass()}>
-                <Col>
-                    <h3 className="d-inline">News</h3>
-                    <NewspaperIcon className="home-icons-size pb-1" />
+                    {Title().renderH3("News")}
+                    <NewspaperIcon color={iconColor()} className="home-icons-size pb-1" />
                 </Col>
             </Row>
         </>
@@ -104,33 +125,36 @@ const renderCompanyInformations = (companyInfos) => {
         <>
             {/* col-xs-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3*/}
             <Col className={renderColClass()}>
-                {Title().render("Name")}
+                {Title().renderH6("Name: ")}
                 {Paragraph().render(companyInfos?.name)}
                 <br />
-                {Title().render("Founder")}
+                {Title().renderH6("Founder: ")}
                 {Paragraph().renderhWithAnchorToWikipedia(companyInfos?.founder)}
                 <br />
-                {Title().render("Founded")}
+                {Title().renderH6("Founded: ")}
                 {Paragraph().render(companyInfos?.founded)}
                 <br />
-                {Title().render("CEO")}
+                {Title().renderH6("CEO: ")}
                 {Paragraph().renderhWithAnchorToWikipedia(companyInfos?.ceo)}
             </Col>
             <Col className={renderColClass()}>
-                {Title().render("CTO")}
+                {Title().renderH6("CTO: ")}
                 {Paragraph().renderhWithAnchorToWikipedia(companyInfos?.cto)}
                 <br />
-                {Title().render("COO")}
+                {Title().renderH6("COO: ")}
                 {Paragraph().renderhWithAnchorToWikipedia(companyInfos?.coo)}
                 <br />
-                {Title().render("Employees")}
+                {Title().renderH6("Employees: ")}
                 {Paragraph().render(millify(companyInfos?.employees))}
                 <br />
-                {Title().render("Valuation")}
-                {Paragraph().render(millify(companyInfos?.valuation))}
+                {Title().renderH6("Valuation: ")}
+                {Paragraph().render(`US$ ${millify(companyInfos?.valuation)}`)}
             </Col>
         </>
     );
 }
 
+const iconColor = () => {
+    return 'primary'
+}
 export default Homepage;
