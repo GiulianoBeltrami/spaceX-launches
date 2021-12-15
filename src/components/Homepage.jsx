@@ -1,11 +1,13 @@
+import React from 'react';
+
 import LinkIcon from '@mui/icons-material/Link';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import NoteIcon from '@mui/icons-material/Note';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import millify from 'millify';
-import React from 'react';
 import { Col, Row } from 'react-bootstrap';
+
 import helper from '../helpers/HomepageHelper';
 import { useGetSpacexInfosQuery } from '../services/spacexAPI';
 import Loader from './Loader';
@@ -13,7 +15,10 @@ import Loader from './Loader';
 const { Title, Paragraph, Anchor } = helper;
 
 const Homepage = () => {
-    const { data, isFetching } = useGetSpacexInfosQuery();
+    const { data: companyInformation, isFetching } = useGetSpacexInfosQuery();
+    const { address, city, state } = companyInformation?.headquarters;
+    const { summary } = companyInformation;
+    const { website, flickr, twitter, elon_twitter } = companyInformation?.links;
 
     if (isFetching) {
         return <Loader />
@@ -21,32 +26,32 @@ const Homepage = () => {
     return (
         <>
             {/* col-xs-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3*/}
-            <Row className={renderRowClass()}>
+            <Row className={rowStyle()}>
                 <Col>
                     {Title().renderH3("SpaceX project")}
                     <p className="lead">
                         This is an unofficial project, designed to show lauches from spaceX company along with some other company informations and news.
                         All the informations come from a public api.
-                        <br />Source: <a className="text-dark" href="https://github.com/r-spacex/SpaceX-API">Api</a>
+                        <br />Api documentation: <a className="text-dark" href="https://github.com/r-spacex/SpaceX-API">Api</a>
                         <br />Created by: Giuliano Vigna Beltrami <br />
                         <a className="text-dark" href="https://github.com/GiulianoBeltrami">Github profile</a>
                     </p>
                 </Col>
             </Row>
 
-            <Row className={renderRowClass()}>
+            <Row className={rowStyle()}>
                 <Row>
                     <Col>
                         {Title().renderH3("Company informations")}
-                        <RocketLaunchIcon color={iconColor()}  className="home-icons-size pb-1" />
+                        <RocketLaunchIcon color={iconColor()} className="home-icons-size pb-1" />
                     </Col>
                 </Row>
                 <Row>
-                    {renderCompanyInformations(data)}
+                    {renderCompanyInformations(companyInformation)}
                 </Row>
             </Row>
 
-            <Row className={renderRowClass()}>
+            <Row className={rowStyle()}>
                 <Row>
                     <Col>
                         {Title().renderH3("Location")}
@@ -54,9 +59,9 @@ const Homepage = () => {
                     </Col>
                 </Row>
 
-                <Row className="text-center">
+                <Row className="text-center pb-2">
                     <Col>
-                        {Paragraph().render(data?.headquarters?.address + ',' + data?.headquarters?.city + ',' + data?.headquarters?.state)}
+                        {Paragraph().render(address + ',' + city + ',' + state)}
                     </Col>
                 </Row>
 
@@ -69,7 +74,7 @@ const Homepage = () => {
                 </Row>
             </Row>
 
-            <Row className={renderRowClass()}>
+            <Row className={rowStyle()}>
                 <Row>
                     <Col>
                         {Title().renderH3("Summary")}
@@ -78,12 +83,12 @@ const Homepage = () => {
                 </Row>
                 <Row>
                     <Col>
-                        {Paragraph().render(data?.summary)}
+                        {Paragraph().render(summary)}
                     </Col>
                 </Row>
             </Row>
 
-            <Row className={renderRowClass()}>
+            <Row className={rowStyle()}>
                 <Row>
                     <Col>
                         {Title().renderH3("Links")}
@@ -92,19 +97,19 @@ const Homepage = () => {
                 </Row>
                 <Row>
                     <Col>
-                        {Title().renderH6('SpaceX website: ')} {Anchor().renderToCustomAnchor(data?.links?.website, data?.links?.website)}
+                        {Title().renderH6('SpaceX website: ')} {Anchor().renderToCustomHref(website, website)}
                         <br />
-                        {Title().renderH6('Flickr: ')} {Anchor().renderToCustomAnchor(data?.links?.flickr, data?.links?.flickr)}
+                        {Title().renderH6('Flickr: ')} {Anchor().renderToCustomHref(flickr, flickr)}
                         <br />
-                        {Title().renderH6('Twitter: ')} {Anchor().renderToCustomAnchor(data?.links?.twitter, data?.links?.twitter)}
+                        {Title().renderH6('Twitter: ')} {Anchor().renderToCustomHref(twitter, twitter)}
                         <br />
-                        {Title().renderH6('Elon twitter: ')} {Anchor().renderToCustomAnchor(data?.links?.elon_twitter, data?.links?.elon_twitter)}
+                        {Title().renderH6('Elon twitter: ')} {Anchor().renderToCustomHref(elon_twitter, elon_twitter)}
                         <br />
                     </Col>
                 </Row>
             </Row>
 
-            <Row className={renderRowClass()}>
+            <Row className={rowStyle()}>
                 <Col>
                     {Title().renderH3("News")}
                     <NewspaperIcon color={iconColor()} className="home-icons-size pb-1" />
@@ -114,41 +119,41 @@ const Homepage = () => {
     )
 }
 
-const renderRowClass = () => {
+const rowStyle = () => {
     return "align-middle pt-3 px-sm-5 mx-sm-5 px-md-5 mx-md-5 px-lg-6 mx-lg-6";
 }
 
 const renderCompanyInformations = (companyInfos) => {
-    const renderColClass = () => "col-xs-6 col-sm-3 col-md-6 col-lg-4 col-xl-2";
-
+    const colStyle = () => "col-xs-6 col-sm-3 col-md-6 col-lg-4 col-xl-2";
+    const { name, founder, founded, ceo, cto, coo, employees, valuation } = companyInfos
     return (
         <>
             {/* col-xs-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3*/}
-            <Col className={renderColClass()}>
+            <Col className={colStyle()}>
                 {Title().renderH6("Name: ")}
-                {Paragraph().render(companyInfos?.name)}
+                {Paragraph().render(name)}
                 <br />
                 {Title().renderH6("Founder: ")}
-                {Paragraph().renderhWithAnchorToWikipedia(companyInfos?.founder)}
+                {Paragraph().renderhWithAnchorToWikipedia(founder)}
                 <br />
                 {Title().renderH6("Founded: ")}
-                {Paragraph().render(companyInfos?.founded)}
+                {Paragraph().render(founded)}
                 <br />
                 {Title().renderH6("CEO: ")}
-                {Paragraph().renderhWithAnchorToWikipedia(companyInfos?.ceo)}
+                {Paragraph().renderhWithAnchorToWikipedia(ceo)}
             </Col>
-            <Col className={renderColClass()}>
+            <Col className={colStyle()}>
                 {Title().renderH6("CTO: ")}
-                {Paragraph().renderhWithAnchorToWikipedia(companyInfos?.cto)}
+                {Paragraph().renderhWithAnchorToWikipedia(cto)}
                 <br />
                 {Title().renderH6("COO: ")}
-                {Paragraph().renderhWithAnchorToWikipedia(companyInfos?.coo)}
+                {Paragraph().renderhWithAnchorToWikipedia(coo)}
                 <br />
                 {Title().renderH6("Employees: ")}
-                {Paragraph().render(millify(companyInfos?.employees))}
+                {Paragraph().render(millify(employees))}
                 <br />
                 {Title().renderH6("Valuation: ")}
-                {Paragraph().render(`US$ ${millify(companyInfos?.valuation)}`)}
+                {Paragraph().render(`US$ ${millify(valuation)}`)}
             </Col>
         </>
     );
@@ -157,4 +162,5 @@ const renderCompanyInformations = (companyInfos) => {
 const iconColor = () => {
     return 'primary'
 }
+
 export default Homepage;

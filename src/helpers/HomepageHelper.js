@@ -37,7 +37,7 @@ const Anchor = {
         )
     },
 
-    renderToCustomAnchor : (href,text) =>{
+    renderToCustomHref : (href,text) =>{
         return (
             <a target="_blank" className="text-dark" rel="noreferrer" href={href}>
                 {Paragraph.render(text)}
