@@ -9,7 +9,6 @@ import { Col, Row } from 'react-bootstrap';
 import helper from '../helpers/HomepageHelper';
 import { useGetSpacexInfosQuery } from '../services/spacexAPI';
 import Loader from './Loader';
-import { Maps } from '../components'
 
 const { Title, Paragraph } = helper;
 
@@ -21,7 +20,7 @@ const Homepage = () => {
     }
     return (
         <>
-            <Row className="pt-3 px-5 mx-5">
+            <Row className="pt-3 ">
                 <Col>
                     <h3>SpaceX project</h3>
                     <p className="lead">
@@ -34,7 +33,7 @@ const Homepage = () => {
                 </Col>
             </Row>
 
-            <Row className="align-middle pt-3 px-5 mx-5">
+            <Row className="align-middle pt-3 ">
                 <Row>
                     <Col>
                         <h3 className="d-inline">Company informations</h3>
@@ -46,7 +45,7 @@ const Homepage = () => {
                 </Row>
             </Row>
 
-            <Row className="align-middle pt-3 px-5 mx-5">
+            <Row className="align-middle pt-3">
                 <Row>
                     <Col>
                         <h3 className="d-inline">Location</h3>
@@ -59,25 +58,27 @@ const Homepage = () => {
                     </Col>
                 </Row>
                 <Row>
-
+                    <Col className="text-center">
+                        <iframe src="https://maps.google.com/maps?q=33.920996821351046,%20-118.3279143676075&t=&z=13&ie=UTF8&iwloc=&output=embed" width="550" height="250" frameborder="0" style={{ border: 0 }} allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                    </Col>
                 </Row>
             </Row>
 
-            <Row className="align-middle pt-3 px-5 mx-5">
+            <Row className="align-middle pt-3 ">
                 <Col>
                     <h3 className="d-inline">Summary</h3>
                     <NoteIcon className="home-icons-size pb-1" />
                 </Col>
             </Row>
 
-            <Row className="align-middle pt-3 px-5 mx-5">
+            <Row className="align-middle pt-3 ">
                 <Col>
                     <h3 className="d-inline">Links</h3>
                     <LinkIcon className="home-icons-size pb-1" />
                 </Col>
             </Row>
 
-            <Row className="align-middle pt-3 px-5 mx-5">
+            <Row className="align-middle pt-3 ">
                 <Col>
                     <h3 className="d-inline">News</h3>
                     <NewspaperIcon className="home-icons-size pb-1" />

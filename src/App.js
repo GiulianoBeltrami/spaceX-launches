@@ -12,7 +12,7 @@ const App = () => {
                 </header>
             </div>
             <div >
-                <main className="border rounded m-2 p-1 px-5 mx-5 " style={{backgroundColor:"var(--bs-gray-200)"}}>
+                <main className="border rounded m-2 p-1 " style={{backgroundColor:"var(--bs-gray-200)"}}>
                     <Container fluid >
                         <Routes>
                             <Route path="/" element={<Homepage />} />

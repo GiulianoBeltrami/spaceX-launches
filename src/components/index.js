@@ -7,6 +7,5 @@ export { default as Rockets } from './Rockets';
 export { default as NavigationBar } from './NavigationBar';
 export { default as LaunchDetails } from './LaunchDetails';
 export { default as Footer} from './Footer';
-export { default as Maps} from './Maps';
 
 
