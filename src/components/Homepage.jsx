@@ -5,30 +5,35 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import NewspaperIcon from '@mui/icons-material/Newspaper';
 import NoteIcon from '@mui/icons-material/Note';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
+import StarIcon from '@mui/icons-material/Star';
 import millify from 'millify';
 import { Col, Row } from 'react-bootstrap';
 
 import helper from '../helpers/HomepageHelper';
 import { useGetSpacexInfosQuery } from '../services/spacexAPI';
 import Loader from './Loader';
+import News from './News';
 
 const { Title, Paragraph, Anchor } = helper;
 
 const Homepage = () => {
     const { data: companyInformation, isFetching } = useGetSpacexInfosQuery();
-    const { address, city, state } = companyInformation?.headquarters;
-    const { summary } = companyInformation;
-    const { website, flickr, twitter, elon_twitter } = companyInformation?.links;
 
     if (isFetching) {
         return <Loader />
     }
+
+    const { address, city, state } = companyInformation?.headquarters;
+    const { summary } = companyInformation;
+    const { website, flickr, twitter, elon_twitter } = companyInformation?.links;
+
     return (
         <>
             {/* col-xs-6 col-sm-3 col-md-3 col-lg-3 col-xl-3 col-xxl-3*/}
             <Row className={rowStyle()}>
                 <Col>
                     {Title().renderH3("SpaceX project")}
+                    <StarIcon color={iconColor()} className="home-icons-size pb-2" />
                     <p className="lead">
                         This is an unofficial project, designed to show lauches from spaceX company along with some other company informations and news.
                         All the informations come from a public api.
@@ -43,7 +48,7 @@ const Homepage = () => {
                 <Row>
                     <Col>
                         {Title().renderH3("Company informations")}
-                        <RocketLaunchIcon color={iconColor()} className="home-icons-size pb-1" />
+                        <RocketLaunchIcon color={iconColor()} className="home-icons-size pb-2" />
                     </Col>
                 </Row>
                 <Row>
@@ -55,7 +60,7 @@ const Homepage = () => {
                 <Row>
                     <Col>
                         {Title().renderH3("Location")}
-                        <LocationOnIcon color={iconColor()} className="home-icons-size pb-1" />
+                        <LocationOnIcon color={iconColor()} className="home-icons-size pb-2" />
                     </Col>
                 </Row>
 
@@ -78,7 +83,7 @@ const Homepage = () => {
                 <Row>
                     <Col>
                         {Title().renderH3("Summary")}
-                        <NoteIcon color={iconColor()} className="home-icons-size pb-1" />
+                        <NoteIcon color={iconColor()} className="home-icons-size pb-2" />
                     </Col>
                 </Row>
                 <Row>
@@ -92,7 +97,7 @@ const Homepage = () => {
                 <Row>
                     <Col>
                         {Title().renderH3("Links")}
-                        <LinkIcon color={iconColor()} className="home-icons-size pb-1" />
+                        <LinkIcon color={iconColor()} className="home-icons-size pb-2" />
                     </Col>
                 </Row>
                 <Row>
@@ -110,10 +115,15 @@ const Homepage = () => {
             </Row>
 
             <Row className={rowStyle()}>
-                <Col>
-                    {Title().renderH3("News")}
-                    <NewspaperIcon color={iconColor()} className="home-icons-size pb-1" />
-                </Col>
+                <Row>
+                    <Col>
+                        {Title().renderH3("News")}
+                        <NewspaperIcon color={iconColor()} className="home-icons-size pb-2" />
+                    </Col>
+                </Row>
+                <Row className="text-center">
+                    <News simplified />
+                </Row>
             </Row>
         </>
     )
