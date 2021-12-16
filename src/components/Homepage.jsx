@@ -121,7 +121,7 @@ const Homepage = () => {
                         <NewspaperIcon color={iconColor()} className="home-icons-size pb-2" />
                     </Col>
                 </Row>
-                <Row className="text-center">
+                <Row>
                     <News simplified />
                 </Row>
             </Row>

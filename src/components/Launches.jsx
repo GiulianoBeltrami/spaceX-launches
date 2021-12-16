@@ -1,10 +1,16 @@
-import React from 'react'
+import React from 'react';
+
+import {Row, Col } from 'react-bootstrap';
 
 const Launches = () => {
     return (
-        <div>
-            <h1 color='#000000'>Launches</h1>
-        </div>
+        <>
+           <Row>
+               <Col className="bg-primary">
+                    Teste
+               </Col>
+           </Row>
+        </>
     )
 }
 
