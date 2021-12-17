@@ -71,7 +71,7 @@ const Homepage = () => {
                 </Row>
 
                 <Row className="justify-content-center">
-                    <Col className="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
+                    <Col className="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 col-xxl-8">
                         <div className="ratio ratio-16x9">
                             <iframe src="https://maps.google.com/maps?q=33.920996821351046,%20-118.3279143676075&t=&z=13&ie=UTF8&iwloc=&output=embed" ></iframe>
                         </div>
@@ -114,14 +114,14 @@ const Homepage = () => {
                 </Row>
             </Row>
 
-            <Row className={rowStyle()}>
+            <Row className="align-middle pt-3 px-0 mx-0 px-sm-5 mx-sm-5 px-md-5 mx-md-5 px-lg-6 mx-lg-6">
                 <Row>
-                    <Col>
+                    <Col className="ps-0">
                         {Title().renderH3("News")}
                         <NewspaperIcon color={iconColor()} className="home-icons-size pb-2" />
                     </Col>
                 </Row>
-                <Row>
+                <Row className="px-0 mx-0 ">
                     <News simplified />
                 </Row>
             </Row>

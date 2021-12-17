@@ -11,9 +11,17 @@ export const spacexAPI = createApi({
         getSpacexInfos: builder.query({
             query: () => createRequest(`/v4/company`),
         }),
+        getSpacexPastLaunches: builder.query({
+            query: () => createRequest(`/v4/launches/past`),
+        }),
+        getSpacexUpcomingLaunches: builder.query({
+            query: () => createRequest(`/v4/launches/upcoming`),
+        }),
     })
 });
 
 export const {
-    useGetSpacexInfosQuery
+    useGetSpacexInfosQuery,
+    useGetSpacexPastLaunchesQuery,
+    useGetSpacexUpcomingLaunchesQuery
 } = spacexAPI;

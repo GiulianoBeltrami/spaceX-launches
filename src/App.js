@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route, Link } from 'react-router-dom';
 import { NavigationBar, Homepage, Launches, LaunchDetails, Landpads, News, Payloads, Rockets, Footer } from './components';
-import {Container} from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 const App = () => {
     return (
@@ -12,7 +12,7 @@ const App = () => {
                 </header>
             </div>
             <div >
-                <main className="border rounded m-2 p-1" style={{backgroundColor:"var(--bs-gray-200)"}}>
+                <main className="border rounded m-2 p-1" style={{ backgroundColor: "var(--bs-gray-200)" }}>
                     <Container fluid >
                         <Routes>
                             <Route path="/" element={<Homepage />} />
