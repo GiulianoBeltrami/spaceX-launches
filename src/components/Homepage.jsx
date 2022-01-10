@@ -9,7 +9,7 @@ import StarIcon from '@mui/icons-material/Star';
 import millify from 'millify';
 import { Col, Row } from 'react-bootstrap';
 
-import helper from '../helpers/HomepageHelper';
+import helper from '../helpers/Helpers';
 import { useGetSpacexInfosQuery } from '../services/spacexAPI';
 import Loader from './Loader';
 import News from './News';
@@ -114,9 +114,9 @@ const Homepage = () => {
                 </Row>
             </Row>
 
-            <Row className="align-middle pt-3 px-0 mx-0 px-sm-5 mx-sm-5 px-md-5 mx-md-5 px-lg-6 mx-lg-6">
+            <Row className={rowStyle()}>
                 <Row>
-                    <Col className="ps-0">
+                    <Col>
                         {Title().renderH3("News")}
                         <NewspaperIcon color={iconColor()} className="home-icons-size pb-2" />
                     </Col>

@@ -18,11 +18,12 @@ const News = ({ simplified }) => {
     }
 
     const newsArray = spacexNews?.value;
+    console.log(newsArray);
 
     return (
         <Row className="px-0 mx-0">
             {newsArray.map((news, arrayIndex) => {
-                const { name, datePublished } = news;
+                const { name, datePublished,url } = news;
                 const { contentUrl: imageUrl } = news?.image?.thumbnail || {};
                 const { contentUrl: providerImageUrl } = news?.provider[0]?.image?.thumbnail || {};
                 const { name: providerName } = news?.provider[0];
@@ -54,7 +55,9 @@ const News = ({ simplified }) => {
                                         {moment(datePublished).startOf('ss').fromNow()}
                                     </Col>
                                 </Row>
-                                <a className="stretched-link"></a>
+                                <a target="_blank" className="stretched-link" rel="noreferrer" href={url}>
+                                    Show more...
+                                </a>
                             </Body>
                         </Card>
                     </Col>
